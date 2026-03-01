@@ -27,6 +27,12 @@ This project implements a multi-class lung disease classification system using c
 ## 🛠️ Technologies
 Python, TensorFlow, Keras, OpenCV, NumPy, Matplotlib, Google Colab
 
+## 📄 Publication
+
+This research work was published at ICERECT-2025 (IEEE Technically Sponsored Conference).
+
+🔗 IEEE Xplore: https://ieeexplore.ieee.org/document/11376083
+
 ## 🚀 How to Run
 1. Clone this repository
 2. Install required libraries
