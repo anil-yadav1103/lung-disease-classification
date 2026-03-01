@@ -72,10 +72,6 @@ Execute all notebook cells sequentially.
 ## 🛠️ Technologies
 Python, TensorFlow, Keras, OpenCV, NumPy, Matplotlib, Google Colab
 
-## 📄 Publication
 
-This research work was published at ICERECT-2025 (IEEE Technically Sponsored Conference).
-
-🔗 IEEE Xplore: https://ieeexplore.ieee.org/document/11376083
 
 
