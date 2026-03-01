@@ -19,7 +19,7 @@ This project implements a multi-class lung disease classification system using c
 - Validation Accuracy: 85.53%
 - Evaluated using Precision, Recall, and F1-score
 ## 📈 Training & Validation Accuracy
-![Training and Validation Accuracy](training_validation_accuracy.png)
+![Training and Validation Accuracy](training_validation_accuracy.png.png)
 
 ## 📉 Training & Validation Loss
 ![Training and Validation Loss](training_validation_loss.png.png)
