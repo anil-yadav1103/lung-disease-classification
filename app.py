@@ -13,10 +13,12 @@ if not os.path.exists(MODEL_FILE):
     url = f"https://drive.google.com/uc?id={file_id}"
     gdown.download(url, MODEL_FILE, quiet=False)
 
-# Load the model
-model = tf.keras.models.load_model(MODEL_FILE)
+# Load model
+model = tf.keras.models.load_model(MODEL_FILE, compile=False)
 
-# Streamlit UI
+# Class labels
+class_names = ["Normal", "Pneumonia"]
+
 st.title("Lung Disease Detection using Chest X-ray")
 
 st.write("Upload a chest X-ray image to detect lung disease.")
@@ -37,5 +39,9 @@ if uploaded_file is not None:
 
     prediction = model.predict(img)
 
-    st.subheader("Prediction Output")
-    st.write(prediction)
+    predicted_class = class_names[np.argmax(prediction)]
+    confidence = np.max(prediction)
+
+    st.subheader("Prediction Result")
+    st.write(f"Diagnosis: **{predicted_class}**")
+    st.write(f"Confidence: **{confidence:.2f}**")
