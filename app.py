@@ -5,24 +5,26 @@ from PIL import Image
 import gdown
 import os
 
+# Model file name
 MODEL_FILE = "efficientnetv2m_final_model.keras"
 
-# Download model from Google Drive if not present
+# Google Drive file ID
+FILE_ID = "1y2ityFxupLlsaU4CRTRfyiGE_SwITntO"
+
+# Download model if not present
 if not os.path.exists(MODEL_FILE):
-    file_id = "1y2ityFxupLlsaU4CRTRfyiGE_SwITntO"
-    url = f"https://drive.google.com/uc?id={file_id}"
+    url = f"https://drive.google.com/uc?id={FILE_ID}"
     gdown.download(url, MODEL_FILE, quiet=False)
 
-# Load model
+# Load the trained model
 model = tf.keras.models.load_model(MODEL_FILE, compile=False)
 
-# Class labels
-class_names = ["Normal", "Pneumonia"]
-
+# Streamlit page title
 st.title("Lung Disease Detection using Chest X-ray")
 
-st.write("Upload a chest X-ray image to detect lung disease.")
+st.write("Upload a chest X-ray image to detect Pneumonia.")
 
+# File uploader
 uploaded_file = st.file_uploader(
     "Upload Chest X-ray Image",
     type=["jpg", "jpeg", "png"]
@@ -30,18 +32,27 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file is not None:
 
-    image = Image.open(uploaded_file)
+    # Display image
+    image = Image.open(uploaded_file).convert("RGB")
     st.image(image, caption="Uploaded Image", use_column_width=True)
 
-    img = image.resize((224,224))
-    img = np.array(img)/255.0
-    img = img.reshape(1,224,224,3)
+    # Preprocess image (same as training)
+    image = image.resize((256, 256))
+    img = np.array(image).astype("float32") / 255.0
+    img = np.expand_dims(img, axis=0)
 
+    # Prediction
     prediction = model.predict(img)
 
-    predicted_class = class_names[np.argmax(prediction)]
-    confidence = np.max(prediction)
+    # Binary classification
+    if prediction[0][0] > 0.5:
+        diagnosis = "PNEUMONIA"
+        confidence = float(prediction[0][0])
+    else:
+        diagnosis = "NORMAL"
+        confidence = float(1 - prediction[0][0])
 
+    # Display result
     st.subheader("Prediction Result")
-    st.write(f"Diagnosis: **{predicted_class}**")
+    st.write(f"Diagnosis: **{diagnosis}**")
     st.write(f"Confidence: **{confidence:.2f}**")
