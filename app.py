@@ -11,7 +11,7 @@ MODEL_FILE = "efficientnetv2m_final_model.keras"
 @st.cache_resource
 def load_model():
     model_path = hf_hub_download(
-        repo_id="anil-yadav1103/chest-xray-model",   # ← your HF model repo name
+        repo_id="Anilbommanoni/chest-xray-model",   # ← your HF model repo name
         filename=MODEL_FILE,
         repo_type="model"
     )
