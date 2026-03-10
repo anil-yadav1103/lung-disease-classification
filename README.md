@@ -1,3 +1,13 @@
+
+---
+title: Chest Xray Detector
+emoji: 🫁
+colorFrom: blue
+colorTo: red
+sdk: docker
+pinned: false
+---
+
 # Enhanced Deep Learning Techniques for Multi-Class Classification of Lung Disorders in Chest X-Rays
 
 ## 📌 Project Overview
